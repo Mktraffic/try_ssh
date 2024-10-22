@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import co.edu.uptc.animals_rest.models.Animal;
 import co.edu.uptc.animals_rest.services.AnimalService;
 
-
+import static java.lang.Thread.sleep;
 
 
 @RestController
@@ -37,14 +37,24 @@ public class AnimalController {
 //    }
    
    @GetMapping("/all")
-   public List<Object> getAnimalAll() throws IOException {
+   public List<Object> getAnimalAll() throws IOException, InterruptedException {
        logger.info("getAnimalAll called");
+       try {
+           Thread.sleep(5000);
+       } catch (InterruptedException e) {
+           throw new RuntimeException(e);
+       }
        return animalService.getAnimalAll();
    }
 
    @GetMapping("/range")
-   public List<Object> getAnimal(@RequestParam int from, @RequestParam int to) throws IOException {
+   public List<Object> getAnimal(@RequestParam int from, @RequestParam int to) throws IOException, InterruptedException {
        logger.info("getAnimal called with parameters: from = {}, to = {}", from, to);
+       try {
+           Thread.sleep(5000);
+       } catch (InterruptedException e) {
+           throw new RuntimeException(e);
+       }
        return animalService.getAnimalInRange(from, to);
    }
 
